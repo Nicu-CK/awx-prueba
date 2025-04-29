@@ -1,14 +1,14 @@
 ---
-- name: Actualizar el sistema
+- name: Instalar net-tools
   hosts: all
   become: yes
   tasks:
-    - name: Actualizar la caché de paquetes (Debian/Ubuntu)
+    - name: Actualizar la lista de paquetes
       apt:
         update_cache: yes
-      when: ansible_facts['os_family'] == "Debian"
 
-    - name: Actualizar todos los paquetes instalados (Debian/Ubuntu)
+    - name: Instalar net-tools
       apt:
-        upgrade: dist
-      when: ansible_facts['os_family'] ==
+        name: net-tools
+        state: present
+
