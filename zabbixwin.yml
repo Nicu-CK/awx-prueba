@@ -1,0 +1,30 @@
+- name: Instalar Zabbix Agent en Windows
+  gather_facts: no  # Si no necesitas recopilar hechos de la máquina
+
+  vars:
+    zabbix_server: "10.34.1.90"  # Cambia esto a la IP de tu servidor Zabbix
+    install_path: "C:\\Program Files\\Zabbix"  # Ruta de instalación deseada
+
+  tasks:
+    - name: Descargar Zabbix Agent MSI
+      win_get_url:
+        url: https://cdn.zabbix.com/zabbix/binaries/stable/6.0/6.0.23/zabbix_agent-6.0.23-windows-amd64-openssl.msi
+        dest: C:\zabbix_agent.msi
+
+    - name: Instalar Zabbix Agent
+      win_package:
+        path: C:\zabbix_agent.msi
+        product_id: '{AC6DA170-0356-4C33-81D7-5705A1D2CC23}'  # ID del producto de Zabbix Agent
+        state: present
+
+    - name: Configurar Zabbix Agent
+      win_lineinfile:
+        path: "C:\\Program Files\\Zabbix\\zabbix_agentd.conf"
+        regexp: '^Server='
+        line: "Server={{ zabbix_server }}"  # Dirección IP de tu servidor Zabbix
+
+    - name: Iniciar el servicio de Zabbix Agent
+      win_service:
+        name: "Zabbix Agent"
+        start_mode: auto
+        state: started
