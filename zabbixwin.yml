@@ -14,7 +14,6 @@
     - name: Instalar Zabbix Agent
       win_package:
         path: C:\zabbix_agent.msi
-        product_id: '{AC6DA170-0356-4C33-81D7-5705A1D2CC23}'  # ID del producto de Zabbix Agent
         state: present
 
     - name: Configurar Zabbix Agent
