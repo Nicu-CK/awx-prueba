@@ -1,0 +1,2 @@
+Environment,UserName,Password,ServerName,App,Type,ShouldRun,WorkingDirectory,Path,Arguments,Consumers,Remarks
+DEV,Nicu.Kirlacovschi,Matotato1234.,BECA05,Controller,EXE,YES,C:\Windows\System32,C:\Windows\System32\notepad.exe,,1,
